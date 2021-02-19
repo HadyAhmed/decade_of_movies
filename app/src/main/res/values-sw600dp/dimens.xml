@@ -2,6 +2,7 @@
 <resources>
     <dimen name="movie_item_height">300dp</dimen>
 
+    <dimen name="small_margin">12dp</dimen>
     <dimen name="medium_margin">16dp</dimen>
 
     <dimen name="box_radius">16dp</dimen>

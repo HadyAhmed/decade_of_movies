@@ -3,36 +3,76 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="com.hadi.movies.data.network.Status" />
+
+        <variable
+            name="message"
+            type="String" />
+
+        <variable
+            name="status"
+            type="Status" />
+
+        <variable
+            name="retryAction"
+            type="com.hadi.movies.utils.CallbackAction" />
+    </data>
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="6dp"
-        app:cardUseCompatPadding="true">
+        app:cardCornerRadius="@dimen/box_radius"
+        app:cardElevation="@dimen/movie_card_elevation"
+        app:cardUseCompatPadding="true"
+        app:viewVisibility="@{status!=Status.SUCCESS}">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/medium_margin">
 
             <ProgressBar
                 android:id="@+id/loading_pb"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:viewVisibility="@{status==Status.LOADING}" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:text="@string/loading_msg"
+                android:textAppearance="?textAppearanceBody1"
+                app:viewVisibility="@{status==Status.LOADING}" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_image"
+                android:textAlignment="center"
+                android:textAppearance="?textAppearanceBody1"
+                app:viewVisibility="@{status==Status.EMPTY}" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{message??@string/network_error_message}"
+                android:textAlignment="center"
                 android:textAppearance="?textAppearanceBody2"
+                app:viewVisibility="@{status==Status.ERROR||status==Status.FAILED}"
                 tools:text="No Internet Connection" />
 
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="retry"
-                app:cornerRadius="12dp" />
+                android:onClick="@{()->retryAction.sendCallBack()}"
+                android:text="@string/retry"
+                app:cornerRadius="@dimen/button_radius"
+                app:viewVisibility="@{status==Status.ERROR||status==Status.FAILED}" />
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>

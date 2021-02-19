@@ -20,7 +20,6 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/Theme.DecadeOfMovies.PopupOverlay"
                 app:title="@string/app_name" />
 
         </com.google.android.material.appbar.AppBarLayout>

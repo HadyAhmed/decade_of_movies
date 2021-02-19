@@ -4,6 +4,7 @@ package com.hadi.movies.data.model.local
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import com.hadi.movies.utils.convertToLineStrings
 
 @Entity
 data class Movie(
@@ -19,4 +20,7 @@ data class Movie(
     val title: String,
     @SerializedName("year")
     val year: Int
-)
+) {
+    fun castString(): String = cast.convertToLineStrings()
+    fun genresString(): String = genres.convertToLineStrings()
+}

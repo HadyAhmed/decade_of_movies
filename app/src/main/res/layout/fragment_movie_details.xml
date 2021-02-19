@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.hadi.movies.utils.AdapterType" />
+
+        <variable
+            name="movieViewModel"
+            type="com.hadi.movies.ui.details.MovieDetailsViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movie_details_rv"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/movie_item_height"
+                android:layout_margin="@dimen/medium_margin"
+                android:orientation="horizontal"
+                app:adapterType="@{AdapterType.MOVIE_PHOTOS_ADAPTER}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:recyclerItems="@{movieViewModel.moviePhotos.data.photos.photo}"
+                tools:listitem="@layout/item_movie_photo" />
+
+            <include
+                android:id="@+id/loading_movie_details_view"
+                layout="@layout/layout_loading_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="@+id/movie_details_rv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/movie_details_rv"
+                bind:message="@{movieViewModel.moviePhotos.message}"
+                bind:retryAction="@{movieViewModel.retry}"
+                bind:status="@{movieViewModel.moviePhotos.apiStatus}" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/movie_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/medium_margin"
+                android:text="@{movieViewModel.movieDetails.title}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/movie_details_rv"
+                tools:text="Harry Potter" />
+
+            <RatingBar
+                android:id="@+id/movie_rating"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:numStars="5"
+                android:rating="@{movieViewModel.movieDetails.rating}"
+                android:stepSize="1"
+                app:layout_constraintEnd_toStartOf="@+id/movie_year"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/movie_title_tv"
+                tools:rating="3" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/movie_year"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/medium_margin"
+                android:text="@{String.valueOf(movieViewModel.movieDetails.year)}"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                app:layout_constraintBottom_toBottomOf="@+id/movie_rating"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/movie_rating"
+                app:layout_constraintTop_toTopOf="@+id/movie_rating"
+                tools:text="Harry Potter" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/cast_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:text="@string/cast"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/movie_rating" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/cast_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/medium_margin"
+                android:text="@{movieViewModel.movieDetails.castString()}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cast_label"
+                tools:text="Hadi, Ahmed, AShour" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/genres_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:text="@string/genres"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cast_value" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/genres_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="@{movieViewModel.movieDetails.genresString()}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/genres_label"
+                tools:text="Hadi, Ahmed, AShour" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>
