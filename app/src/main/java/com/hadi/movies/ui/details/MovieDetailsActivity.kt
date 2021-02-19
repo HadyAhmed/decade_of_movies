@@ -1,12 +1,24 @@
 package com.hadi.movies.ui.details
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.hadi.movies.R
+import com.hadi.movies.databinding.ActivityMovieDetailsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieDetailsActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMovieDetailsBinding
+
+    private val movieDetailsViewModel by viewModels<MovieDetailsViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_details)
+        binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.lifecycleOwner = this
+        binding.movieViewModel = movieDetailsViewModel
     }
+
 }

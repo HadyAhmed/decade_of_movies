@@ -10,6 +10,7 @@ interface MoviesApiService {
     suspend fun fetchMovie(
         @Query("method") method: String = "flickr.photos.search",
         @Query("api_key") apiKey: String = "b7e43ddc0c64e5133caef70b13ba3352",
+        @Query("format") format: String = "json",
         @Query("nojsoncallback") nojsoncallback: Int = 1,
         @Query("text") title: String,
         @Query("page") page: Int = 1,
