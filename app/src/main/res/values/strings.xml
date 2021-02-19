@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Decade Of Movies</string>
+    <string name="movie_title_hint">movie title</string>
+</resources>

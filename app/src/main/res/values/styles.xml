@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SearchTextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopEnd">@dimen/box_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/box_radius</item>
+        <item name="boxCornerRadiusTopStart">@dimen/box_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/box_radius</item>
+    </style>
+</resources>
