@@ -17,8 +17,12 @@ class MovieDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
+
         binding.lifecycleOwner = this
         binding.movieViewModel = movieDetailsViewModel
+        binding.detailsContainer.movieDetailsRv.adapter = MoviePhotosAdapter()
     }
 
 }

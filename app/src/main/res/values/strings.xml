@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Decade Of Movies</string>
+
     <string name="movie_title_hint">movie title</string>
+    <string name="details">Details</string>
+    <string name="cast">Cast</string>
+    <string name="genres">Genres</string>
+    <string name="retry">retry</string>
+    <string name="loading_msg">Loading…</string>
+    <string name="network_error_message">No Internet Connection</string>
+    <string name="no_image">No Preview Images</string>
 </resources>

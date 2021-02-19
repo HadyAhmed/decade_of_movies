@@ -31,7 +31,6 @@ class MovieListActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-        binding.toolbar.title = title
 
         twoPane = binding.homeContainerView.movieDetailsHostFragment != null
 
@@ -50,8 +49,7 @@ class MovieListActivity : AppCompatActivity() {
                 .replace(
                     R.id.movie_details_host_fragment,
                     MovieDetailsFragment::class.java,
-                    bundleOf(Constants.MOVIE_ID to movieId),
-                    "details"
+                    bundleOf(Constants.MOVIE_ID to movieId), "details"
                 )
                 .commit()
         } else {
