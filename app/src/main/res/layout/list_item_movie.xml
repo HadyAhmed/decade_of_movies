@@ -30,22 +30,35 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/comfortaa"
                 android:hint="@string/movie_title_hint"
+                android:imeOptions="actionDone"
                 android:inputType="text"
                 android:singleLine="true"
                 android:text="@={viewModel.movieTitle}" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/movies_rv"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:scrollbars="vertical"
-            app:adapterType="@{AdapterType.HOME_MOVIES}"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:recyclerItems="@{viewModel.movies}"
-            app:spanCount="2"
-            tools:listitem="@layout/item_movie" />
+            android:layout_weight="1">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movies_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                app:adapterType="@{AdapterType.HOME_MOVIES}"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:recyclerItems="@{viewModel.movies}"
+                app:spanCount="2"
+                tools:listitem="@layout/item_movie" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/no_result"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:viewVisibility="@{viewModel.movies.isEmpty()}" />
+        </FrameLayout>
     </LinearLayout>
 </layout>
