@@ -9,4 +9,5 @@
     <string name="loading_msg">Loading…</string>
     <string name="network_error_message">No Internet Connection</string>
     <string name="no_image">No Preview Images</string>
+    <string name="flicker_movie_details_desc">This is the flicker movie photos</string>
 </resources>

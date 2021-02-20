@@ -20,8 +20,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
+            android:contentDescription="@string/flicker_movie_details_desc"
             android:scaleType="centerCrop"
             app:imgSrc="@{photo}" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/small_margin"
+            app:lottie_fileName="slide.json"
+            app:lottie_loop="true" />
 
     </com.google.android.material.card.MaterialCardView>
 </layout>

@@ -42,7 +42,7 @@ class MovieDetailsViewModel @ViewModelInject constructor(
     }
 
     private fun callFlickr(it: Movie) {
-        repository.searchForMovie(it.title).onEach {
+        repository.fetchMovieFlickerPhotos(it.title).onEach {
             _moviePhotos.value = it
         }.launchIn(viewModelScope)
     }

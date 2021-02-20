@@ -5,16 +5,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.core.widget.doOnTextChanged
-import androidx.lifecycle.lifecycleScope
 import com.hadi.movies.Constants
 import com.hadi.movies.R
 import com.hadi.movies.databinding.ActivityItemListBinding
 import com.hadi.movies.ui.details.MovieDetailsActivity
 import com.hadi.movies.ui.details.MovieDetailsFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MovieListActivity : AppCompatActivity() {
@@ -29,17 +25,17 @@ class MovieListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityItemListBinding.inflate(layoutInflater)
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
         twoPane = binding.homeContainerView.movieDetailsHostFragment != null
 
-        binding.homeContainerView.searchEt.doOnTextChanged { text, _, _, _ ->
-            searchMovies(text.toString())
-        }
+        viewModel.movieTitle.observe(this) { viewModel.searchForMovie(it) }
 
         movieSearchAdapter = MoviesAdapter { movieId -> showMovieDetails(movieId) }
         binding.homeContainerView.moviesRv.adapter = movieSearchAdapter
+
     }
 
     private fun showMovieDetails(movieId: Int) {
@@ -57,14 +53,6 @@ class MovieListActivity : AppCompatActivity() {
                 putExtra(Constants.MOVIE_ID, movieId)
             }
             startActivity(movieDetailsIntent)
-        }
-    }
-
-    private fun searchMovies(movieTitle: String? = null) {
-        lifecycleScope.launch {
-            viewModel.searchForMovie(movieTitle).collect {
-                movieSearchAdapter.submitList(it)
-            }
         }
     }
 

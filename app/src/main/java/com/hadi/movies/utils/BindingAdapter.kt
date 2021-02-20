@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide
 import com.hadi.movies.data.model.Photo
+import com.hadi.movies.data.model.local.Movie
 import com.hadi.movies.ui.details.MoviePhotosAdapter
+import com.hadi.movies.ui.list.MoviesAdapter
+import com.hadi.movies.utils.AdapterType.HOME_MOVIES
 import com.hadi.movies.utils.AdapterType.MOVIE_PHOTOS_ADAPTER
 
 @BindingAdapter("imgSrc")
@@ -33,6 +36,10 @@ fun bindRecyclerView(recyclerView: RecyclerView, items: List<Any>?, adapterType:
                 snapHelper.attachToRecyclerView(recyclerView)
                 adapter.moviePhotos = items as List<Photo>
                 adapter.notifyDataSetChanged()
+            }
+            HOME_MOVIES -> {
+                val adapter = recyclerView.adapter as MoviesAdapter
+                adapter.submitList(items as List<Movie>)
             }
         }
     }

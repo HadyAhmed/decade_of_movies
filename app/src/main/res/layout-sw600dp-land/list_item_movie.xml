@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="com.hadi.movies.utils.AdapterType" />
+
+        <variable
+            name="viewModel"
+            type="com.hadi.movies.ui.list.MovieListViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,7 +44,8 @@
                         android:fontFamily="@font/comfortaa"
                         android:hint="@string/movie_title_hint"
                         android:inputType="text"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        android:text="@={viewModel.movieTitle}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -44,7 +54,9 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:scrollbars="vertical"
+                    app:adapterType="@{AdapterType.HOME_MOVIES}"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:recyclerItems="@{viewModel.movies}"
                     app:spanCount="2"
                     tools:listitem="@layout/item_movie" />
 

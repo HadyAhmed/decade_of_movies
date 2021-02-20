@@ -19,7 +19,6 @@ import retrofit2.HttpException
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
 @Singleton
 class MoviesRepository @Inject constructor(
     @ApplicationContext private val context: Context,
@@ -38,13 +37,18 @@ class MoviesRepository @Inject constructor(
         }
     }
 
-    fun search(title: String? = null): Flow<List<Movie>> =
-        database.movieDao().searchForMovies("%$title%")
+    fun search(title: String? = null): Flow<List<Movie>> {
+        return if (title.isNullOrEmpty()) {
+            database.movieDao().showAllMovies()
+        } else {
+            database.movieDao().searchForMovies("%$title%")
+        }
+    }
 
     fun fetchMovieDetails(movieId: Int): Flow<Movie> =
         database.movieDao().fetchMovieDetails(movieId)
 
-    fun searchForMovie(title: String): Flow<Resource<PhotosResponse>> = flow {
+    fun fetchMovieFlickerPhotos(title: String): Flow<Resource<PhotosResponse>> = flow {
         if (networkManager.isNetworkConnected()) {
             emit(Resource.Loading())
             try {
