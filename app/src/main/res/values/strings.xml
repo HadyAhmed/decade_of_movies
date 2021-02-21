@@ -1,14 +1,17 @@
 <resources>
     <string name="app_name">Decade Of Movies</string>
-
-    <string name="movie_title_hint">movie title</string>
+    <!--Movie Details Strings-->
     <string name="details">Details</string>
     <string name="cast">Cast</string>
     <string name="genres">Genres</string>
+    <!--Loading View Strings-->
     <string name="retry">retry</string>
     <string name="loading_msg">Loading…</string>
     <string name="network_error_message">No Internet Connection</string>
     <string name="no_image">No Preview Images</string>
-    <string name="flicker_movie_details_desc">This is the flicker movie photos</string>
+    <!--Home Movies Strings-->
     <string name="no_result">No Result Found!</string>
+    <string name="movie_title_hint">movie title</string>
+    <!--Movie Item Strings-->
+    <string name="flicker_movie_details_desc">This is the flicker movie photos</string>
 </resources>

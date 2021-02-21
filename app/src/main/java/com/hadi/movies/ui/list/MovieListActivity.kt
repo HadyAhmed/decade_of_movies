@@ -46,8 +46,7 @@ class MovieListActivity : AppCompatActivity() {
                     R.id.movie_details_host_fragment,
                     MovieDetailsFragment::class.java,
                     bundleOf(Constants.MOVIE_ID to movieId), "details"
-                )
-                .commit()
+                ).commit()
         } else {
             val movieDetailsIntent = Intent(this, MovieDetailsActivity::class.java).apply {
                 putExtra(Constants.MOVIE_ID, movieId)

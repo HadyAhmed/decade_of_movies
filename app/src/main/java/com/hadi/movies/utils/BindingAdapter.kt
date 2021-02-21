@@ -32,6 +32,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, items: List<Any>?, adapterType:
         when (adapterType) {
             MOVIE_PHOTOS_ADAPTER -> {
                 val adapter = recyclerView.adapter as MoviePhotosAdapter
+                // adding snap helper page to act like view pager scrolling
                 val snapHelper: SnapHelper = PagerSnapHelper()
                 snapHelper.attachToRecyclerView(recyclerView)
                 adapter.moviePhotos = items as List<Photo>
